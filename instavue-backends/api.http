@@ -1,0 +1,123 @@
+@base_url = http://localhost:8000
+@access_token = YOUR_ACCESS_TOKEN_HERE
+
+###
+# 🔐 Register a new user
+POST {{base_url}}/api/auth/users/
+Content-Type: application/json
+
+{
+  "username": "julius",
+  "email": "julius@example.com",
+  "password": "TestPassword123"
+}
+
+###
+# 🔑 Login and get JWT tokens
+POST {{base_url}}/api/auth/jwt/create/
+Content-Type: application/json
+
+{
+  "username": "banju",
+  "password": "TestPassword123"
+}
+
+###
+# 🔁 Refresh JWT token
+POST {{base_url}}/api/auth/jwt/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "YOUR_REFRESH_TOKEN"
+}
+
+###
+# 👤 Get current user info
+GET {{base_url}}/api/auth/users/me/
+Authorization: Bearer {{access_token}}
+
+###
+# 📝 Create a post
+POST {{base_url}}/api/posts/
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "caption": "This is a test post from api.http!"
+}
+
+###
+# 📃 Get all posts
+GET {{base_url}}/api/posts/
+Authorization: Bearer {{access_token}}
+
+###
+# 💬 Comment on a post
+POST {{base_url}}/api/comments/
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "post": 1,
+  "body": "Nice post!"
+}
+
+###
+# ❤️ Like a post
+POST {{base_url}}/api/likes/
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "post": 1
+}
+
+###
+# 👤 Get my profile
+GET {{base_url}}/api/profiles/me/
+Authorization: Bearer {{access_token}}
+
+###
+# 🌍 Public profile by username
+GET {{base_url}}/api/profiles/banju/
+Authorization: Bearer {{access_token}}
+
+###
+# 👥 Follow a user
+POST {{base_url}}/api/follow/
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "user_id": 2
+}
+
+###
+# 🔁 Unfollow a user
+POST {{base_url}}/api/unfollow/
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "user_id": 2
+}
+
+###
+# 👀 Get my followers
+GET {{base_url}}/api/followers/
+Authorization: Bearer {{access_token}}
+
+###
+# ➕ Get who I'm following
+GET {{base_url}}/api/following/
+Authorization: Bearer {{access_token}}
+
+###
+# 🔍 Search users (if implemented)
+GET {{base_url}}/api/search/?q=julius
+Authorization: Bearer {{access_token}}
+
+###
+# 🏠 Feed (home timeline from followed users)
+GET {{base_url}}/api/feed/
+Authorization: Bearer {{access_token}}
